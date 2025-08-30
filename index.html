@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>NOT NORMALS GUILD</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  body {
+    background: radial-gradient(circle at top, #06060b, #000);
+    color: #e6f7ff;
+    font-family: 'Orbitron', sans-serif;
+    background-attachment: fixed;
+    background-size: cover;
+  }
+  .step { display: none; opacity: 0; transition: opacity 0.25s ease; }
+  .step.active { display: block; opacity: 1; }
+  .option-label {
+    background: rgba(18,18,28,0.7);
+    color: #e6f7ff;
+    padding: 10px 16px;
+    cursor: pointer;
+    margin: 5px;
+    border-radius: 12px;
+    display: inline-block;
+    transition: all 0.18s ease;
+    border: 1px solid rgba(0,183,255,0.14);
+  }
+  .option-label:hover { box-shadow: 0 0 12px rgba(0,217,255,0.12); transform: translateY(-2px); }
+  .option-label.selected {
+    background: #00d9ff;
+    color: #001218;
+    font-weight: 700;
+    box-shadow: 0 0 18px #00d9ff, 0 0 30px #009dff;
+  }
+  input, textarea, select {
+    background: rgba(8,8,12,0.65);
+    border: 1px solid rgba(0,183,255,0.12);
+    color: #e6f7ff;
+    transition: all 0.15s;
+    padding: .75rem;
+    border-radius: .75rem;
+    width: 100%;
+  }
+  input:focus, textarea:focus, select:focus {
+    border-color: #00d9ff;
+    box-shadow: 0 0 12px rgba(0,217,255,0.12);
+    outline: none;
+  }
+  button { font-family: 'Orbitron', sans-serif; font-weight: 700; transition: all 0.2s ease; }
+  button:hover { transform: scale(1.03); box-shadow: 0 0 18px rgba(0,217,255,0.12); }
+  .card {
+    background: rgba(0,0,0,0.55);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(0,183,255,0.10);
+    border-radius: 18px;
+    padding: 1.6rem;
+    box-shadow: 0 6px 30px rgba(0,0,0,0.6);
+  }
+</style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4">
+
+<div class="max-w-3xl w-full mx-auto card">
+
+  <!-- Step 1 -->
+  <div id="step1" class="step active space-y-3">
+    <h1 class="text-3xl text-center text-cyan-400 font-bold mb-2">NOT NORMALS GUILD</h1>
+    <h2 class="text-lg font-bold mb-2 text-white">Step 1: Guild Members Info</h2>
+    <input id="uid" placeholder="Game UID" />
+    <input id="gameName" placeholder="Game Name" />
+    <input id="age" type="number" placeholder="Age" />
+    <input id="studyClass" placeholder="Current Class" />
+    <input id="city" placeholder="City" />
+    <input id="country" placeholder="Country" />
+    <button id="next1" class="mt-4 bg-cyan-400 text-black px-6 py-3 rounded-2xl w-full sm:w-auto">Next</button>
+  </div>
+
+  <!-- Step 2 -->
+  <div id="step2" class="step space-y-4">
+    <h2 class="text-2xl font-bold mb-2 text-white">Step 2: Choose Category</h2>
+
+    <!-- <-- FIX: the options are present here so listeners can attach --> -->
+    <div id="categoryOptions" class="flex flex-col sm:flex-row flex-wrap gap-3">
+      <label class="option-label"><input type="radio" name="category" value="Esports" class="hidden"> Esports</label>
+      <label class="option-label"><input type="radio" name="category" value="Rank Push" class="hidden"> Rank Push</label>
+      <label class="option-label"><input type="radio" name="category" value="Freestyle" class="hidden"> Freestyle</label>
+    </div>
+
+    <div class="mt-4 flex justify-between">
+      <button id="prev2" class="bg-white/10 px-5 py-2 rounded-xl">Back</button>
+      <button id="next2" class="bg-cyan-400 px-6 py-2 rounded-xl">Next</button>
+    </div>
+  </div>
+
+  <!-- Step 3 -->
+  <div id="step3" class="step space-y-3">
+    <h2 class="text-2xl font-bold mb-2 text-white">Step 3: Sub-options & Time</h2>
+    <div id="subOptions" class="flex flex-col sm:flex-row flex-wrap gap-3"></div>
+
+    <div id="esportsSerious" class="mt-3 hidden">
+      <label class="block text-cyan-300">Are you serious about Esports?</label>
+      <select id="serious" class="mt-1">
+        <option value="">Select</option>
+        <option value="Yes">Yes</option>
+        <option value="No">No</option>
+      </select>
+      <div id="reasonDiv" class="mt-2 hidden">
+        <textarea id="reason" placeholder="Reason for being serious..."></textarea>
+      </div>
+    </div>
+
+    <textarea id="timetable" placeholder="Time table (e.g., 7-10 PM)" class="mt-2"></textarea>
+
+    <div class="mt-4 flex justify-between">
+      <button id="prev3" class="bg-white/10 px-5 py-2 rounded-xl">Back</button>
+      <button id="copyBtn" class="bg-cyan-400 px-6 py-2 rounded-xl">Copy Info</button>
+    </div>
+  </div>
+
+  <!-- Enter Section -->
+  <div id="enterSection" class="step flex flex-col items-center justify-center space-y-4">
+    <h2 class="text-3xl font-bold mb-4 text-cyan-400">Welcome to NOT NORMALS GUILD</h2>
+    <p class="text-center">You must send the copied info to <span class="font-bold text-white">haker444official@gmail.com</span> to get approval.</p>
+    <button id="enterBtn" class="bg-cyan-400 px-6 py-3 rounded-2xl text-black">Enter Guild</button>
+  </div>
+
+</div>
+
+<script>
+  // State
+  let selectedCategory = '';
+  let infoCopied = false;
+  const messenger = 'https://m.me/j/Abbg68oRu8cZl3sa/';
+
+  function showStep(stepId) {
+    document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+    document.getElementById(stepId).classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  // Step 1
+  document.getElementById('next1').addEventListener('click', () => {
+    const uid = document.getElementById('uid').value.trim();
+    const gameName = document.getElementById('gameName').value.trim();
+    const age = document.getElementById('age').value.trim();
+    const studyClass = document.getElementById('studyClass').value.trim();
+    const city = document.getElementById('city').value.trim();
+    const country = document.getElementById('country').value.trim();
+    if (!uid || !gameName || !age || !studyClass || !city || !country) {
+      alert('Please fill all fields');
+      return;
+    }
+    showStep('step2');
+  });
+
+  // Category selection (event delegation so it works reliably)
+  document.getElementById('categoryOptions').addEventListener('click', (e) => {
+    const label = e.target.closest('.option-label');
+    if (!label) return;
+    document.querySelectorAll('#categoryOptions .option-label').forEach(l => l.classList.remove('selected'));
+    label.classList.add('selected');
+    const input = label.querySelector('input[type="radio"]');
+    if (input) {
+      input.checked = true;
+      selectedCategory = input.value;
+    } else {
+      selectedCategory = label.textContent.trim();
+    }
+  });
+
+  // Next from Step 2 -> prepare Step 3 suboptions
+  document.getElementById('next2').addEventListener('click', () => {
+    if (!selectedCategory) { alert('Please select category'); return; }
+
+    const subDiv = document.getElementById('subOptions');
+    subDiv.innerHTML = ''; // clear previous
+
+    if (selectedCategory === 'Esports') {
+      subDiv.innerHTML = `
+        <label class="option-label"><input type="radio" name="subOption" value="Full Map Esports" class="hidden"> Full Map Esports</label>
+        <label class="option-label"><input type="radio" name="subOption" value="CS Esports" class="hidden"> CS Esports</label>
+      `;
+      document.getElementById('esportsSerious').classList.remove('hidden');
+    } else if (selectedCategory === 'Rank Push') {
+      subDiv.innerHTML = `
+        <label class="option-label"><input type="radio" name="subOption" value="BR Rank Push" class="hidden"> BR Rank Push</label>
+        <label class="option-label"><input type="radio" name="subOption" value="CSR Rank Push" class="hidden"> CSR Rank Push</label>
+      `;
+      document.getElementById('esportsSerious').classList.add('hidden');
+      document.getElementById('serious').value = '';
+      document.getElementById('reasonDiv').style.display = 'none';
+    } else { // Freestyle or others
+      subDiv.innerHTML = ''; 
+      document.getElementById('esportsSerious').classList.add('hidden');
+      document.getElementById('serious').value = '';
+      document.getElementById('reasonDiv').style.display = 'none';
+    }
+
+    // attach click handler (replace previous if any)
+    subDiv.onclick = function(e) {
+      const label = e.target.closest('.option-label');
+      if (!label) return;
+      subDiv.querySelectorAll('.option-label').forEach(x => x.classList.remove('selected'));
+      label.classList.add('selected');
+      const inp = label.querySelector('input[type="radio"]');
+      if (inp) inp.checked = true;
+    };
+
+    showStep('step3');
+  });
+
+  // Back buttons
+  document.getElementById('prev2').addEventListener('click', () => showStep('step1'));
+  document.getElementById('prev3').addEventListener('click', () => showStep('step2'));
+
+  // Serious dropdown
+  document.getElementById('serious').addEventListener('change', () => {
+    document.getElementById('reasonDiv').style.display = (document.getElementById('serious').value === 'Yes' ? 'block' : 'none');
+  });
+
+  // Copy info (final validation improved)
+  document.getElementById('copyBtn').addEventListener('click', () => {
+    const subOption = document.querySelector('input[name="subOption"]:checked')?.value || '';
+    const timetable = document.getElementById('timetable').value.trim();
+    const serious = document.getElementById('serious')?.value || '';
+    const reason = document.getElementById('reason')?.value || '';
+
+    // If category expects suboptions (everything except Freestyle), require one
+    if (selectedCategory !== 'Freestyle' && !subOption) { alert('Please select sub-option'); return; }
+
+    // If Esports, require serious selection + reason if Yes
+    if (selectedCategory === 'Esports' && serious === '') { alert('Please select Yes/No for serious'); return; }
+    if (serious === 'Yes' && !reason) { alert('Please write reason'); return; }
+
+    if (!timetable) { alert('Please enter timetable'); return; }
+
+    const data = `UID: ${document.getElementById('uid').value.trim()}
+Game Name: ${document.getElementById('gameName').value.trim()}
+Age: ${document.getElementById('age').value.trim()}
+Class: ${document.getElementById('studyClass').value.trim()}
+City: ${document.getElementById('city').value.trim()}
+Country: ${document.getElementById('country').value.trim()}
+Category: ${selectedCategory}
+SubOption: ${subOption}
+Serious: ${serious}
+Reason: ${reason}
+TimeTable: ${timetable}`;
+
+    navigator.clipboard.writeText(data).then(() => {
+      alert('All info copied to clipboard! Send it to haker444official@gmail.com to get approval.');
+      infoCopied = true;
+      showStep('enterSection');
+    }).catch(() => {
+      alert('Could not copy automatically — please select all text and copy manually:\n\n' + data);
+    });
+  });
+
+  // Enter Guild
+  document.getElementById('enterBtn').addEventListener('click', () => {
+    if (!infoCopied) { alert('Please copy info and send to Gmail first!'); return; }
+    window.location.href = messenger;
+  });
+</script>
+
+</body>
+</html>
